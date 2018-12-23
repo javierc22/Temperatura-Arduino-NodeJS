@@ -18,7 +18,8 @@ parser.on('open', function() {
 
 // Cuando conexión está recibiendo datos
 parser.on('data', function(data) {
-  console.log(data);
+  let temp = parseInt(data, 10) + " °C";
+  console.log(temp);
   // console.log(typeof data); => String
 });
 
