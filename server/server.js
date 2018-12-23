@@ -1,3 +1,24 @@
+// ----------------- SERVIDOR --------------------- //
+const http = require('http');
+const express = require('express');
+const SocketIO = require('socket.io');
+
+// Inicializando servidor y socketIO
+const app = express();
+const server = http.createServer(app);
+const io = SocketIO.listen(server);
+
+app.use(express.static(__dirname + '/public'));
+
+server.listen(3000, function() {
+  console.log('server listening on port', 3000);
+});
+
+server.on('error',function(){
+  console.log('err');
+});
+
+// ----------------- COMUNICACION SERIAL --------------------- //
 const Serialport = require('serialport');
 
 // Obtener cada lectura en una línea nueva
@@ -20,6 +41,7 @@ parser.on('open', function() {
 parser.on('data', function(data) {
   let temp = parseInt(data, 10) + " °C";
   console.log(temp);
+  io.emit('temp', data.toString());
   // console.log(typeof data); => String
 });
 
