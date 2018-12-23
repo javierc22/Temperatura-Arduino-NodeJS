@@ -8,7 +8,7 @@ void setup() {
   pinMode(LED_GREEN, OUTPUT);
 }
 
-int signalVoltage, celsiusTemp;
+long signalVoltage, celsiusTemp;
 
 void loop() {
   // Señal análoga de 0 a 1023
